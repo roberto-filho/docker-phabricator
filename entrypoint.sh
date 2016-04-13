@@ -16,9 +16,9 @@ fi
 
 # If a apache server name was specified, hack in the phabricator.conf
 if [ -z "${APACHE_SERVER_NAME}" ]; then
-  sed -e "s/{{APACHE_SERVER_NAME}}//g" -i phabricator.conf
+  sed -e "s/{{APACHE_SERVER_NAME}}//g" -i /etc/apache2/sites-available/phabricator.conf
 else
-  sed -e "s/{{APACHE_SERVER_NAME}}/ServerName ${APACHE_SERVER_NAME}/g" -i phabricator.conf
+  sed -e "s/{{APACHE_SERVER_NAME}}/ServerName ${APACHE_SERVER_NAME}/g" -i /etc/apache2/sites-available/phabricator.conf
 fi
 
 if [ "${1}" = "start-server" ]; then
