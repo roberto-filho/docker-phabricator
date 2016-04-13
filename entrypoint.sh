@@ -14,6 +14,13 @@ else
   echo "${LOCAL_JSON}" > /opt/phabricator/conf/local/local.json
 fi
 
+# If a apache server name was specified, hack in the phabricator.conf
+if [ -z "${APACHE_SERVER_NAME}" ]; then
+  sed -e "s/{{APACHE_SERVER_NAME}}//g" -i phabricator.conf
+else
+  sed -e "s/{{APACHE_SERVER_NAME}}/ServerName ${APACHE_SERVER_NAME}/g" -i phabricator.conf
+fi
+
 if [ "${1}" = "start-server" ]; then
   exec bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
 else
