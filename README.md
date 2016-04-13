@@ -8,7 +8,7 @@ Run with image from hub.docker.com
 ----
 Run a mysql container :
 ```
-docker run --name phabricator-db yesnault/docker-phabricator-mysql
+docker run -d --name phabricator-db yesnault/docker-phabricator-mysql
 ```
 
 Run phabricator :
@@ -17,7 +17,9 @@ docker run -d --name phabricator-main -p 8081:80 --link phabricator-db:database 
 ```
 If you wish to set a ServerName for the apache virtual host, use the APACHE_SERVER_NAME environment variable :
 ```
-docker run -d -e "APACHE_SERVER_NAME=your.domain.com" --name phabricator-main -p 8081:80 --link phabricator-db:database yesnault/docker-phabricator 
+docker run -d -e "APACHE_SERVER_NAME=your.domain.com" \
+--name phabricator-main -p 8081:80 --link \
+phabricator-db:database yesnault/docker-phabricator 
 ```
 
 Go to http://localhost:8081
