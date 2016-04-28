@@ -13,13 +13,15 @@ docker run -d --name phabricator-db yesnault/docker-phabricator-mysql
 
 Run phabricator :
 ```
-docker run -d --name phabricator-main -p 8081:80 --link phabricator-db:database yesnault/docker-phabricator 
+docker run -d --name phabricator-main -p 8081:80 --link phabricator-db:database --restart always yesnault/docker-phabricator
 ```
 If you wish to set a ServerName for the apache virtual host, use the APACHE_SERVER_NAME environment variable :
 ```
 docker run -d -e "APACHE_SERVER_NAME=your.domain.com" \
---name phabricator-main -p 8081:80 --link \
-phabricator-db:database yesnault/docker-phabricator 
+--name phabricator-main -p 8081:80 \
+--link phabricator-db:database \
+--restart always \
+yesnault/docker-phabricator
 ```
 
 Go to http://localhost:8081
