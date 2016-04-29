@@ -22,6 +22,10 @@ else
 fi
 
 if [ "${1}" = "start-server" ]; then
+  # If apache2.pid file was not deleted from previous shutdown, remove it so
+  # apache can start with no errors
+  apache_pid="/run/apache2/apache2.pid"
+  if [ -n "$(ls -lisa $apache_pid)" ]; then rm $apache_pid; fi;
   exec bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/sbin/apache2 -DFOREGROUND"
 else
   exec $@

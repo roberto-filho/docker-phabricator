@@ -21,7 +21,7 @@ docker run -d -e "APACHE_SERVER_NAME=your.domain.com" \
 --name phabricator-main -p 8081:80 \
 --link phabricator-db:database \
 --restart always \
-yesnault/docker-phabricator
+robeto-filho/phabricator
 ```
 
 Go to http://localhost:8081
